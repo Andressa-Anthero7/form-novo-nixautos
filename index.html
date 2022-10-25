@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+ {% load static %}
 <html>
 <head>
-	<title>Lista de MARCA E MODELOS E ANOS CARROS Cidades Usando Jquery e JSON</title>
+    <title>Lista de MARCA E MODELOS E ANOS CARROS Cidades Usando Jquery e JSON</title>
 
-	<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
-	<!-- Bootstrap CSS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <style type="text/css">
@@ -52,7 +53,8 @@
         $(document).ready(function() {
             $('#formulario').show();
             $('#itens-carros').show();
-            
+            $('#opcao-ar input').attr('disabled', true);
+
 
 
 
@@ -89,10 +91,10 @@
             $.getJSON('https://parallelum.com.br/fipe/api/v1/'+tipo+'/marcas', function(data){
                 html += '<option>Selecionaraaaa Marca</option>';
                 for(var i = 0; i < data.length; i++){
-						html += '<option value='+data[i].codigo+' >'+ data[i].nome+'</option><input id="campo-marca" name="field-marca"  value='+data[i].nome+'>';
+                        html += '<option value='+data[i].codigo+' >'+ data[i].nome+'</option><input id="campo-marca" name="field-marca"  value='+data[i].nome+'>';
 
-					}
-					  $('#Marca').html(html);
+                    }
+                      $('#Marca').html(html);
             });
 
 
@@ -116,10 +118,10 @@
                 html += '<option>Selecionaraaaa Modelo</option>';
                 //console.log(modelos)
                 for(var c = 0; c < modelos.modelos.length; c++){
-						html += '<option value='+modelos.modelos[c].codigo+' >'+ modelos.modelos[c].nome+'</option><input id="campo-modelo" name="field-modelo"  value='+modelos.modelos[c].nome+'>';
+                        html += '<option value='+modelos.modelos[c].codigo+' >'+ modelos.modelos[c].nome+'</option><input id="campo-modelo" name="field-modelo"  value='+modelos.modelos[c].nome+'>';
 
-					}
-					  $('#Modelo').html(html);
+                    }
+                      $('#Modelo').html(html);
             });
 
 
@@ -146,17 +148,17 @@
                 //alert(anos[1])
                 for(var j = 0; j < anos.length; j++){
 
-						html += '<option value='+anos[j].codigo+' >'+ anos[j].codigo.slice(0,4)+'</option><input id="campo-modelo" name="field-modelo"  value='+anos[j].nome+'>';
+                        html += '<option value='+anos[j].codigo+' >'+ anos[j].codigo.slice(0,4)+'</option><input id="campo-modelo" name="field-modelo"  value='+anos[j].nome+'>';
 
                         console.log(anos[j].nome.slice(0,4))
                         if(anos[j].nome.slice(0,4) == '3200'){
-						   html -= '<option value='+anos[j].codigo+' >'+ anos[j].codigo.slice(0,4)+'</option><input id="campo-modelo" name="field-modelo"  value='+anos[j].nome+'>';
+                           html -= '<option value='+anos[j].codigo+' >'+ anos[j].codigo.slice(0,4)+'</option><input id="campo-modelo" name="field-modelo"  value='+anos[j].nome+'>';
                            html += '<option>Selecionaraaaa Ano</option>';
                            html += '<option value='+anos[j].codigo+' >ZERO KM</option><input id="campo-modelo" name="field-modelo"  value='+anos[j].nome+'>';
 
                         };
-					}
-					  $('#Ano').html(html);
+                    }
+                      $('#Ano').html(html);
 
             });
 
@@ -179,25 +181,6 @@
         });
 
 
-        
-
-        
-
-        
-
-
-        
-
-
-
-        
-
-
-
-
-
-
-
 
 
 
@@ -213,180 +196,19 @@
 
     </script>
 
-    <style type="text/css">
-        *{
-            margin: 0;
-            padding: 0;
-        }
-
-        label{
-            margin-left:10px;
-            position: relative;
-            top: 25px;
-            z-index:-1;
-        }
-
-        #campo-marca{
-            max-width: 250px;
-            left:30px;
-        }
-
-
-
-        #campo-modelo{
-            position: relative;
-            top: -112px;
-            left:270px;
-            min-width: 620px;
-        }
-
-        #campo-ano{
-            position: relative;
-            top: -224px;
-            left:880px;
-            max-width: 200px;
-        }
-
-        #campo-combustivel{
-            position: relative;
-            top: -250px;
-            left: 30px;
-        }
-
-        #campo-cor{
-            position: relative;
-            top: -362px;
-            left: 310px;
-        }
-
-        #campo-portas{
-            position: relative;
-            top: -474px;
-            left: 590px;
-        }
-
-        #campo-cambio{
-            position: relative;
-            top:-560px;
-            left:780px;
-        }
-
-        #campo-licenciamento{
-            position: relative;
-            top:-560px;
-            left:30px;
-        }
-
-        #campo-ipva{
-            position: relative;
-            top:-648px;
-            left:300px;
-
-        }
-
-        #campo-placa{
-            position: relative;
-            top:-825px;
-            left:870px;
-
-        }
-
-        #placa{
-            position: relative;
-            top: 2px;
-            left: 0px;
-        }
-
-        #campo-financiado{
-            position: relative;
-            top:-735px;
-            left:580px;
-
-        }
-
-        #campo-valor{
-            position: relative;
-            top:-800px;
-            left:800px;
-
-        }
-
-        
-
-        #valor{
-            position: relative;
-            top: 2px;
-            left: 0px;
-        }
-
-        #divisoria-1{
-            position: relative;
-            top: -760px;
-        }
-
-        
-
-        #info-documento{
-            position: relative;
-            top: 0px;
-
-        }
-
-        #itens-carros{
-            position: relative;
-            top: -700px;
-           
-        }
-
-        #campo-acendedor{
-
-        }
-
-        #campo-airbags{
-
-        }
-
-        #campo-alarme{
-
-        }
-
-        #campo-ar-condicionado{
-            
-        }
-
-        #campo-ar-quente{
-
-        }
-
-        #campo-direcao{
-           
-        }
-
-        .alinhamento-opcao{
-            position: absolute;
-            left: 250px;
-        }
-
-
-
-        input, span{
-         
-          cursor: pointer;
-         
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="itens-carros-estilo.css">
 
 
 
         <!-- Formulário Carros -->
-         <form enctype="multipart/form-data" method="POST" id="formulario" class=" border border-dark rounded " action="/criar-anuncio/">
+         <form enctype="multipart/form-data" method="POST" id="formulario" class=" border border-dark rounded " action="criar-anuncio/">
 
                 {% csrf_token %}
                 <div class=" p-2">
                     <h3 class=" ml-5 pl-5 text-nowrap" id="header-formulario">Formulário<span class="px-2" id="variavel-header-form"></span></h3>
                 </div>
                 <div class="col-2" id="campo-marca">
-                    <label class="bg-warning px-2 pb-3 border rounded">Marca</label>
+                    <label class="bg-warning px-2 pb-3 border rounded etiqueta">Marca</label>
                     <select class="form-control" id="Marca" name="marca">
                         <option>Selecionar Marca</option>
                     </select>
@@ -395,7 +217,7 @@
                 </div>
 
                 <div class="col-6 " id="campo-modelo">
-                     <label class="bg-warning px-2 pb-3 border rounded">Modelo</label>
+                     <label class="bg-warning px-2 pb-3 border rounded  etiqueta">Modelo</label>
                     <select class="form-control" id="Modelo" name="modelo">
                         <option>Selecionar Modelo</option>
                     </select>
@@ -405,7 +227,7 @@
 
 
                 <div class="col-2" id="campo-ano">
-                     <label class="bg-warning px-2 pb-3 border rounded">Ano</label>
+                     <label class="bg-warning px-2 pb-3 border rounded  etiqueta">Ano</label>
                     <select class="form-control" id="Ano" name="ano">
                         <option>Selecionar Ano</option>
                     </select>
@@ -414,7 +236,7 @@
                 </div>
 
                 <div class="col-3" id="campo-combustivel">
-                    <label  class="bg-warning px-2 pb-3 border rounded">Combustível</label>
+                    <label  class="bg-warning px-2 pb-3 border rounded  etiqueta">Combustível</label>
                     <select class="form-control" id="Combustivel" name="combustivel">
                          <option>Selecionar Combustível</option>
                          <option value="gasolina">GASOLINA</option>
@@ -431,7 +253,7 @@
 
 
                 <div class="col-3" id="campo-cor">
-                    <label  class="bg-warning px-2 pb-3 border rounded">Cor</label>
+                    <label  class="bg-warning px-2 pb-3 border rounded  etiqueta">Cor</label>
                     <select class="form-control" id="Cor" name="cor">
                         <option>Selecionar Cor</option>
                          {% for cores in cores %}
@@ -444,139 +266,661 @@
              <!--Acessórios Carros -->
              <div id="complemento-carros">
                  <div id="campo-portas" class="col-2">
-                     <label  class="bg-warning px-2 pb-3 border rounded">Portas</label>
+                     <label  class="bg-warning px-2 pb-3 border rounded  etiqueta">Portas</label>
                      <select class="form-control" id="portas" name="portas">
                          <option>Qtde. Portas</option>
-                         <option value="2">2 PORTAS</option>
-                         <option value="3">3 PORTAS</option>
-                         <option value="4">4 PORTAS</option>
-                          <option value="5">5 PORTAS</option>
-                          <option value="6">6 PORTAS</option>
+                         <option value="2 Portas">2 PORTAS</option>
+                         <option value="3 Portas">3 PORTAS</option>
+                         <option value="4 Portas">4 PORTAS</option>
+                          <option value="5 Portas">5 PORTAS</option>
+                          <option value="6 Portas">6 PORTAS</option>
                      </select>
                  </div>
 
                  <div id="campo-cambio" class="col-3">
-                     <label  class="bg-warning px-2 pb-3 border rounded">Câmbio</label>
+                     <label  class="bg-warning px-2 pb-3 border rounded  etiqueta">Câmbio</label>
                      <select class="form-control" id="cambio" name="cambio">
                          <option>CÂMBIO</option>
-                         <option value="2">MANUAL</option>
-                         <option value="3">AUTOMÁTICO</option>
-                         
-                     </select>
-                 </div>
+                         <option value="MANUAL">MANUAL</option>
+                         <option value="AUTOMÁTICO">AUTOMÁTICO</option>
 
-                 
-
-            </div>
-
-            <div id="info-documento">
-
-                 <div id="campo-licenciamento" class="col-3">
-                     <label  class="bg-warning px-2 pb-3 border rounded">Licenciado</label>
-                     <select class="form-control" id="licenciamento" name="licenciamento">
-                         <option value="lincenciado">SIM</option>
-                         <option value="não licenciado">NÃO</option>
-                         
                      </select>
                  </div>
 
                  <div id="campo-ipva" class="col-3">
-                     <label  class="bg-warning px-2 pb-3 border rounded">Ipva</label>
+                     <label  class="bg-warning px-2 pb-3 border rounded  etiqueta">Ipva</label>
                      <select class="form-control" id="ipva" name="ipva">
-                         <option value="ipva-pago">SIM</option>
-                         <option value="ipva-nao-pago">NÃO</option>
-                         
+                         <option value="ipva pago">SIM</option>
+                         <option value="ipva nao pago">NÃO</option>
+
                      </select>
                  </div>
 
-                 <div id="campo-financiado" class="col-3">
-                     <label  class="bg-warning px-2 pb-3 border rounded">Financiado</label>
-                     <select class="form-control" id="financiado" name="financiado">
-                         <option value="nao-financiado">NÃO</option>
-                         <option value="financiado">SIM</option>
-                         
-                     </select>
-                 </div>
+
 
                  <div id='campo-placa'>
-                    <label  class="bg-warning px-2 pb-3 border rounded">Placa</label>
-                    <input type="text" maxlength="7" name="placa" id="placa" class="form-control col-2" placeholder="ABC - 1B34">
-                     
+                    <label  class="bg-warning px-2 pb-3 border rounded  etiqueta">Placa</label>
+                    <input type="text" maxlength="8" name="placa" id="placa" class="form-control col-2" placeholder="ABC - 1B34">
+
                  </div>
+
+
+
 
             </div>
 
 
+
+
+
+
+
+
+
                 <div id="campo-valor">
-                    <label  for="valor" class="bg-warning px-2 pb-3 border rounded" style="position:relative;top:20px;left:10px;font-weight:bold;" >VALOR</label>
+                    <label  for="valor" class="bg-warning px-2 pb-3 border rounded  etiqueta" style="position:relative;top:20px;left:10px;font-weight:bold;" >VALOR</label>
                     <input type="text" maxlength="15" name="valor" id="valor" class="form-control col-3">
 
                 </div>
 
                 <div id="divisoria-1"><hr></div>
 
-                <div id="itens-carros" class="m-3 ">
-                    <!-- CAMPO AR CONDICIONADO -->
-                    <span id="campo-ar-condicionado">
-                        <div id="check-ar-condicionado" class="bg-warning border rounded p-2 col-12">
-                            <span class="ml-5 text-center h5">Ar Condicionado</span>
-
-                            <!-- OPCAO DE AR CONDICIONADO -->
-                            <span id="opcao-ar" class="alinhamento-opcao">
-                                <span class="mx-3">
-                                    <input type="radio" value="Ar Condicionado" id="check-ar-condicionado" name="ar-condicionado">
-                                    <span>Ar Condicionado</span>
-                                
-                                </span>
-
-                                <span class="mx-3">
-                                    <input type="radio" value="Ar Digital" id="ar-digital" name="ar-condicionado">
-                                    <span>Ar Condicionado Digital</span>
-
-                                </span>
+                <div id="itens-carros" class="m-3 row">
 
 
-                                 <span class="mx-3">
-                                    <input type="radio" value="Ar Dual Zone" id="ar-dual-zone" name="ar-condicionado">
-                                    <span>Ar Condicionado Dual Zone</span>
-                                </span>
-                                
-                            </span>
-                             <!-- FINAL  OPCAO DE AR CONDICIONADO -->
-                                
-                        </div>
-                    </span>
-                    <!-- FINAL CAMPO AR CONDICIONADO -->
+
+                    <!-- CHECK BOX OPCIONAIS VEÍCULOS -->
 
 
-                    <!-- CAMPO  DIREÇÃO -->
-                    <span id="campo-direcao">
-                        <div id="check-direcao" class="bg-warning border rounded p-2 col-12">
-                            <span class="ml-5 text-center h5">Direção</span>
+                    <!-- CKECK BOX ACENDEDOR DE CIGARROS -->
 
-                            <!-- OPCAO DE DIREÇÃO -->
-                            <span id="opcao-direcao" class="alinhamento-opcao">
-                                <span class="mx-3">
-                                    <input type="radio" value="Direção Hidráulica" id="direcao-hidraulica" name="direcao">
-                                    <span>Direção Hidráulica</span>
-                                
-                                </span>
-
-                                <span class="mx-3">
-                                    <input type="radio" value="Direção Elétrica" id="direcao-eletrica" name="direcao">
-                                    <span>Direção Elétrica</span>
-
-                                </span>
+                         <span class="bg-warning p-2 border rounded col-3 m-1" id="check-acendedor-cigarros">
+                             <label for="acendedor-cigarros" class="checkbox-itens-carros">Acendedor de Cigarros</label>
+                             <input type="checkbox" id="acendedor-cigarros" name="acendedor_cigarros" value="Acendedor de Cigarros">
+                         </span>
 
 
-                                 
-                                
-                            </span>
-                             <!-- FINAL  OPCAO DE AR CONDICIONADO -->
-                                
-                        </div>
-                    </span>
-                    <!-- FINAL CAMPO AR CONDICIONADO -->
+                    <!-- FINAL CKECK BOX ACENDEDOR DE CIGARROS -->
+
+
+                    <!-- CKECK AIRBAGS -->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-air-bags">
+                             <label for="airbags" class="checkbox-itens-carros">Air Bags</label>
+                             <input type="checkbox" id="airbags" name="air_bags" value="Air Bags">
+                         </span>
+
+
+                    <!-- FINAL CKECK AIRBAGS -->
+
+                    <!-- CKECK ALARME-->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-alarme">
+                             <label for="alarme" class="checkbox-itens-carros">Alarme</label>
+                             <input type="checkbox" id="alarme" name="alarme" value="Alarme">
+                         </span>
+
+
+                    <!-- FINAL CKECK ALARME-->
+
+                    <!-- CKECK AR CONDICIONADO-->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-ar-condicionado" >
+                             <label for="ar-condicionado"  class="checkbox-itens-carros-ar-condicionado" >Ar Condicionado</label>
+                             <input type="checkbox" id="ar-condicionado" name="ar_condicionado" value="Ar Condicionado">
+                         </span>
+
+
+                    <!-- FINAL CKECK AR CONDICIONADO-->
+
+                     <!-- CKECK CONDICIONADO DIGITAL -->
+
+                         <span class="bg-warning p-2 border rounded col-3 m-1" id="check-condicionado-digital" >
+                             <label for="ar-condicionado-digital" class="checkbox-itens-carros">Ar Condicionado Digital</label>
+                             <input type="checkbox" id="ar-condicionado-digital" name="ar_condicionado_digital" value="Ar Condicionado Digital">
+                         </span>
+
+
+                    <!-- FINAL CKECK CONDICIONADO DIGITAL-->
+
+
+                     <!-- CKECK CONDICIONADO DUAL ZONE -->
+
+                         <span class="bg-warning p-2 border rounded col-3 m-1" id="check-condicionado-dual-zone">
+                             <label for="ar-condicionado-digital-dual-zone" class="checkbox-itens-carros-ar-dual-zone"  >Ar Condicionado Dual Zone</label>
+                             <input type="checkbox" id="ar-condicionado-digital-dual-zone" name="ar_condicionado_dual_zone" value="Ar Condicionado Dual Zone">
+                         </span>
+
+
+                    <!-- FINAL CKECK CONDICIONADO DUAL ZONE-->
+
+                    <!-- CKECK AR QUENTE -->
+
+                         <span class="bg-warning p-2 border rounded  col-2 m-1" id="check-ar-quente">
+                             <label for="ar-quente" class="checkbox-itens-carros">Ar Quente</label>
+                             <input type="checkbox" id="ar-quente" name="ar_quente" value="Ar Quente">
+                         </span>
+
+
+                    <!-- FINAL CKECK AR QUENTE-->
+
+                    <!-- CKECK ASSISTENTE DE SAIDA EM ACLIVES -->
+
+                         <span class="bg-warning p-2 border rounded col-3 m-1" id="check-assistente-saida-declive" >
+                             <label for="assistente-saida-aclive" class="checkbox-itens-carros-aclive">Assistente de Saída em Aclive</label>
+                             <input type="checkbox" id="assistente-saida-aclive" name="assistente_saida_aclive" value="Assistente de Saída em Aclives">
+                         </span>
+
+
+                    <!-- FINAL CKECK ASSISTENTE DE SAIDA EM DECLIVE-->
+
+                    <!-- CKECK ASSISTENTE DE SAIDA EM AUDIO SISTEMA DE SOM -->
+
+                         <span class="bg-warning p-2 border rounded col-3 m-1" id="check-sistema-som" >
+                             <label for="sistema-som" class="checkbox-itens-carros">Sistema de Áudio</label>
+                             <input type="checkbox" id="sistema-som" name="sistema_som" value="Sistema de Som">
+                         </span>
+
+                    <!-- FINAL CKECK ASSISTENTE DE SAIDA EM DECLIVE-->
+
+
+                    <!-- CKECK BANCO COM APOIO DE BRAÇO-->
+
+                         <span class="bg-warning p-2 border rounded col-3 m-1" id="check-banco-apoio-braco" >
+                             <label for="banco-apoio-braco" class="checkbox-itens-carros-banco-apoio-braco">Banco com Apoio de Braço</label>
+                             <input type="checkbox" id="banco-apoio-braco" name="banco_apoio_braco" value="Banco com Apoio de Braço">
+                         </span>
+
+                    <!-- FINAL CKECK BANCO COM APOIO DE BRAÇO-->
+
+                     <!-- CKECK BANCO DIANTEIROS COM REGULAGEM ELÉTRICA-->
+
+                         <span class="bg-warning p-2 border rounded col-3 m-1" id="check-banco-regulagem-eletrica" >
+                             <label for="banco-regulagem-eletrica" class=" texto-checkbox">Banco com Regulagem Elétrica</label>
+                             <input type="checkbox" id="banco-regulagem-eletrica" class="input-checkbox" name="banco_regulagem_eletrica" value="Banco com Regulagem Elétrica">
+                         </span>
+
+                    <!-- FINAL CKECK DIANTEIROS COM REGULAGEM ELÉTRICA-->
+
+                    <!-- CKECK BLUETOOTH-->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-bluetooth" >
+                             <label for="bluetooth"  class="checkbox-itens-carros">Bluetooth</label>
+                             <input type="checkbox" id="bluetooth"  name="bluetooth" value="Bluetooth">
+                         </span>
+
+                    <!-- FINAL BLUETOOTH-->
+
+                    <!-- CKECK CALOTAS -->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-calota" >
+                             <label for="calota"  class="checkbox-itens-carros">Calotas</label>
+                             <input type="checkbox" id="calotas"  name="calotas" value="Calotas">
+                         </span>
+
+                    <!-- FINAL  CALOTAS-->
+
+                    <!-- CKECK CÂMBIO AUTOMATIZADO -->
+
+                         <span class="bg-warning p-2 border rounded col-3 m-1" id="check-cambio-automatizado" >
+                             <label for="cambio-automatizado"  class="checkbox-itens-carros">Câmbio Automatizado</label>
+                             <input type="checkbox" id="cambio-automatizado"  name="cambio_automatizado" value="Câmbio Automatizado">
+                         </span>
+
+                    <!-- FINAL  CÂMBIO AUTOMATIZADO-->
+
+                    <!-- CKECK CÂMERA DE RÉ -->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-camera-re" >
+                             <label for="camera-re"  class="texto-checkbox-camera">Câmera de Ré</label>
+                             <input type="checkbox" id="camera-re" class="input-checkbox-camera"  name="camera_re" value="Câmera de Ré">
+                         </span>
+
+                    <!-- FINAL  CÂMERA DE RÉ-->
+
+                    <!-- CHECK CARREGADOR DE DISPOSITIVOS SEM FIO(WIRELESS) -->
+
+                         <span class="bg-warning p-2 border rounded col-4 m-1" id="check-carregador-dispositivo-wireless" >
+                             <label for="carregador-dispositivo-wireless"  class="texto-checkbox">Carregador Dispositivo sem fio(Wireless)</label>
+                             <input type="checkbox" id="carregador-dispositivo-wireless" class="input-checkbox"  name="carregador_dispositivo_wireless" value="Carregador Dispositivo sem fio(Wireless)">
+                         </span>
+
+                    <!-- FINAL  CARREGADOR DE DISPOSITIVOS SEM FIO(WIRELESS)-->
+
+
+                    <!-- CHECK CD/MP3 -->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-cd-mp3" >
+                             <label for="cd-mp3"  class="checkbox-itens-carros">CD/MP3</label>
+                             <input type="checkbox" id="cd-mp3"   name="cd_mp3" value="CD/MP3">
+                         </span>
+
+                    <!-- FINAL   CD/MP3 -->
+
+                    <!-- CHECK CHAVE COM CONTROLE REMOTO DE ABERTURA(KEYLESS) -->
+
+                         <span class="bg-warning p-2 border rounded col-6 m-1" id="check-chaves-keyless" >
+                             <label for="chaves-keyless"  class="checkbox-itens-carros">Chave com controle remoto de abertura/fechamento(keyless)</label>
+                             <input type="checkbox" id="chaves-keyless"   name="chaves_keyless" value="Chave com controle remoto de abertura/fechamento(keyless)">
+                         </span>
+
+                    <!-- FINAL  CHAVE COM CONTROLE REMOTO DE ABERTURA(KEYLESS)-->
+
+                    <!-- CHECK CHAVE COM SENSOR DE PRESENÇA -->
+
+                         <span class="bg-warning p-2 border rounded col-3 m-1" id="check-chaves-sensor-presenca" >
+                             <label for="chaves-sensor-presenca"  class="texto-checkbox">Chave com Sensor de Presença</label>
+                             <input type="checkbox" id="chaves-sensor-presenca" class="input-checkbox"   name="chaves_sensor-presenca" value="Chave com Sensor de Presença">
+                         </span>
+
+                    <!-- FINAL  CHAVE CHAVE COM SENSOR DE PRESENÇA -->
+
+                    <!-- CHECK COMPUTADOR DE BORDO -->
+
+                         <span class="bg-warning p-2 border rounded col-3 m-1" id="check-computador-bordo" >
+                             <label for="computador-bordo"  class="checkbox-itens-carros">Computador de Bordo</label>
+                             <input type="checkbox" id="computador-bordo"    name="computador_bordo" value="Computador de Bordo">
+                         </span>
+
+                    <!-- FINAL  COMPUTADOR DE BORDO  -->
+
+                     <!-- CHECK CONTROLE DE SOM NO VOLANTE -->
+
+                         <span class="bg-warning p-2 border rounded col-3 m-1" id="check-computador-bordo" >
+                             <label for="controle-som-volante"  class="checkbox-itens-carros">Controle Som Volante</label>
+                             <input type="checkbox" id="controle-som-volante"    name="controle_som_volante" value="Controle Som Volante">
+                         </span>
+
+                    <!-- FINAL  CONTROLE DE SOM NO VOLANTE  -->
+
+                     <!-- CHECK CONTROLE ELETRÔNICO DE DESCIDA -->
+
+                         <span class="bg-warning p-2 border rounded col-4 m-1" id="check-controle-eletronico-descida" >
+                             <label for="controle-eletronico-descida"  class="checkbox-itens-carros">Controle Eletrônico de Descida(HDC)</label>
+                             <input type="checkbox" id="controle-eletronico-descida"    name="controle_eletronico_descida" value="Controle Eletrônico de Descida(HDC)">
+                         </span>
+
+                    <!-- FINAL  CONTROLE ELETRÔNICO DE DESCIDA  -->
+
+                     <!-- CHECK DESEMBAÇADOR TRASEIRO -->
+
+                         <span class="bg-warning p-2 border rounded col-3 m-1" id="check-desembacador-traseiro" >
+                             <label for="desembacador-traseiro"  class="checkbox-itens-carros">Desembacador Traseiro</label>
+                             <input type="checkbox" id="desembacador-traseiro"    name="desembacador_traseiro" value="Desembacador Traseiro">
+                         </span>
+
+                    <!-- FINAL  DESEMBAÇADOR TRASEIRO  -->
+
+                     <!-- CHECK DIREÇÃO ELÉTRICA -->
+
+                         <span class="bg-warning p-2 border rounded col-3 m-1" id="check-direcao-eletrica" >
+                             <label for="direcao-eletrica"  class="checkbox-itens-carros">Direção Elétrica(EPS)</label>
+                             <input type="checkbox" id="direcao-eletrica"    name="direcao_eletrica" value="Direção Elétrica(EPS)">
+                         </span>
+
+                    <!-- FINAL  DIREÇÃO ELÉTRICA -->
+
+                     <!-- CHECK DIREÇÃO HIDRAÚLICA -->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-direcao-hidraulica" >
+                             <label for="direcao-hidraulica"  class="texto-checkbox">Direção Hidraúlica</label>
+                             <input type="checkbox" id="direcao-hidraulica" class="input-checkbox"   name="direcao_hidraulica" value="Direção Hidraúlica">
+                         </span>
+
+                    <!-- FINAL  DIREÇÃO HIDRAÚLICA-->
+
+                    <!-- CHECK ENCOSTO DE CABEÇA TRASEIRO -->
+
+                         <span class="bg-warning p-2 border rounded col-3 m-1" id="check-encosto-cabeca-traseiro" >
+                             <label for="encosto-cabeca-traseiro"  class="texto-checkbox">Encosto de Cabeça Traseiro</label>
+                             <input type="checkbox" id="encosto-cabeca-traseiro" class="input-checkbox"   name="encosto_cabeca_traseiro" value="Encosto de Cabeça Traseiro">
+                         </span>
+
+                    <!-- FINAL  ENCOSTO DE CABEÇA TRASEIRO-->
+
+                     <!-- CHECK ESTRIBO -->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-estribo" >
+                             <label for="estribo"  class="checkbox-itens-carros">Estribo</label>
+                             <input type="checkbox" id="estribo"    name="estribo" value="Estribo">
+                         </span>
+
+                    <!-- FINAL  ESTRIBO-->
+
+                     <!-- CHECK FAROIS AUTOMÁTICO-->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-farois-automatico" >
+                             <label for="farois-automatico"  class="texto-checkbox">Fárois Automático</label>
+                             <input type="checkbox" id="farois-automatico" class="input-checkbox"   name="farois_automatico" value="Fárois Automático">
+                         </span>
+
+                    <!-- FINAL FAROIS AUTOMÁTICO-->
+
+
+                     <!-- CHECK FAROIS MILHAS-->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-farois-milhas" >
+                             <label for="farois-milhas"  class="texto-checkbox">Fárois de Milhas</label>
+                             <input type="checkbox" id="farois-milhas" class="input-checkbox"   name="farois_automatico" value="Fárois de Milhas">
+                         </span>
+
+                    <!-- FINAL  FAROIS MILHAS-->
+
+                    <!-- CHECK FAROIS NEBLINA-->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-farois-neblina" >
+                             <label for="farois-neblina"  class="texto-checkbox">Fárois de Neblinas</label>
+                             <input type="checkbox" id="farois-neblina" class="input-checkbox"   name="farois_neblina" value="Fárois de Neblinas">
+                         </span>
+
+                    <!-- FINAL  FAROIS NEBLINA-->
+
+                     <!-- CHECK FREIO ABS-->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-freio-abs" >
+                             <label for="freio-abs"  class="checkbox-itens-carros">Freio Abs</label>
+                             <input type="checkbox" id="freio-abs"   name="freio-abs" value="Freio Abs">
+                         </span>
+
+                    <!-- FINAL  FREIO ABS-->
+
+                     <!-- CHECK GPS-->
+
+                         <span class="bg-warning p-2 border rounded col-1 m-1" id="check-gps" >
+                             <label for="gps"  class="texto-checkbox">GPS</label>
+                             <input type="checkbox" id="gps" class="input-checkbox"  name="gps" value="GPS">
+                         </span>
+
+                    <!-- FINAL  GPS-->
+
+                     <!-- CHECK INSULFILM-->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-insulfilm" >
+                             <label for="insulfilm"  class="checkbox-itens-carros">Insulfilm</label>
+                             <input type="checkbox" id="insulfilm"   name="insulfilm" value="Insulfilm">
+                         </span>
+
+                    <!-- FINAL  INSULFILM-->
+
+
+                    <!-- CHECK LONA MARÍTIMA-->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-lona-maritima" >
+                             <label for="lona-maritima"  class="texto-checkbox-2 ">Lona Marítima</label>
+                             <input type="checkbox" id="lona-maritima" class="input-checkbox-2"  name="lona-maritima" value="Lona Marítima">
+                         </span>
+
+                    <!-- FINAL   LONA MARÍTIMA-->
+
+                    <!-- CHECK LONA MULTIMÍDIA-->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-multimidia" >
+                             <label for="multimidia"  class="checkbox-itens-carros">Multimídia</label>
+                             <input type="checkbox" id="multimidia"   name="multimidia" value="Multimídia">
+                         </span>
+
+                    <!-- FINAL   LONA MULTIMÍDIA-->
+
+                    <!-- CHECK PAINEL LCD-->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-painel-lcd" >
+                             <label for="painel-lcd"  class="texto-checkbox-3">Painel LCD</label>
+                             <input type="checkbox" id="painel-lcd"   name="painel_lcd" value="Painel LCD">
+                         </span>
+
+                    <!-- FINAL   PAINEL LCD-->
+
+                    <!-- CHECK PAINEL DIGITAL-->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-painel-digital" >
+                             <label for="painel-digital"  class="texto-checkbox-3">Painel Digital</label>
+                             <input type="checkbox" id="painel-digital"   name="painel_digital" value="Painel Digital">
+                         </span>
+
+                    <!-- FINAL   PAINEL DIGITAL-->
+
+                    <!-- CHECK PARACHOQUE DA COR DO VEÍCULO-->
+
+                         <span class="bg-warning p-2 border rounded col-3 m-1" id="check-parachoque-na-cor" >
+                             <label for="parachoque-na-cor"  class="texto-checkbox">Parachoque na Cor do Veículo</label>
+                             <input type="checkbox" id="parachoque-na-cor"  class="input-checkbox" name="parachoque_na_cor" value="Parachoque na Cor do Veículol">
+                         </span>
+
+                    <!-- FINAL   PARACHOQUE DA COR DO VEÍCULO-->
+
+                     <!-- CHECK PARK ASSIST-->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-parK-assist" >
+                             <label for="park-assist"  class="checkbox-itens-carros">Park Assist</label>
+                             <input type="checkbox" id="park-assist"   name="park_assist" value="Park Assist">
+                         </span>
+
+                    <!-- FINAL   PARK ASSIST-->
+
+                     <!-- CHECK PARTIDA START STOP-->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-partida-start-stop" >
+                             <label for="partida-start-stop"  class="texto-checkbox">Partida Start Stop</label>
+                             <input type="checkbox" id="partida-start-stop" class="input-checkbox"   name="partida_start_stop" value="Partida Start Stop">
+                         </span>
+
+                    <!-- FINAL   PARTIDA START STOP-->
+
+                      <!-- CHECK PILOTO AUTOMÁTICO-->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-piloto-automatico" >
+                             <label for="piloto-automatico"  class="texto-checkbox">Piloto Automático</label>
+                             <input type="checkbox" id="piloto-automatico" class="input-checkbox"   name="piloto_automatico" value="Piloto Automático">
+                         </span>
+
+                    <!-- FINAL   PILOTO AUTOMATICO-->
+
+                      <!-- CHECK PINTURA METÁLICA-->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-pintura-metalica" >
+                             <label for="pintura-metalica"  class="texto-checkbox">Pintura Metálica</label>
+                             <input type="checkbox" id="pintura-metalica" class="input-checkbox"   name="pintura-metalica" value="Pintura Metálica">
+                         </span>
+
+                    <!-- FINAL   PINTURA METÁLICA   -->
+
+
+                    <!-- CHECK PORTA COPO-->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-porta-copo" >
+                             <label for="porta-copo"  class="texto-checkbox-3">Porta Copo</label>
+                             <input type="checkbox" id="porta-copo" class="input-checkbox-3"   name="porta_copo" value="Porta Copo">
+                         </span>
+
+                    <!-- FINAL   PORTA COPO   -->
+
+                    <!-- CHECK PROTETOR DE CAÇAMBA-->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-protetor-cacamba" >
+                             <label for="protecao-cacamba"  class="texto-checkbox">Proteção Caçamba</label>
+                             <input type="checkbox" id="protecao-cacamba" class="input-checkbox"   name="protecao_cacamba" value="Proteção Caçamba">
+                         </span>
+
+                    <!-- FINAL   PROTETOR CACAMBA   -->
+
+                    <!-- CHECK RÁDIO-->
+
+                         <span class="bg-warning p-2 border rounded col-1 m-1" id="check-radio" >
+                             <label for="radio"  class="texto-checkbox">Rádio</label>
+                             <input type="checkbox" id="radio" class="input-checkbox"   name="radio" value="Rádio">
+                         </span>
+
+                    <!-- FINAL   RÁDIO   -->
+
+                     <!-- CHECK REBATIMENTO DE RETROVISORES EXTERNOS-->
+
+                         <span class="bg-warning p-2 border rounded col-4 m-1" id="check-rebatimento-retrovisores-externos" >
+                             <label for="rebatimento-retrovisores-externos"  class="checkbox-itens-carros">Rebatimento Retrovisores Externos</label>
+                             <input type="checkbox" id="rebatimento-retrovisores-externos"    name="rebatimento_retrovisores_externos" value="Rebatimento Retrovisores Externos">
+                         </span>
+
+                    <!-- FINAL   REBATIMENTO DE RETROVISORES EXTERNOS   -->
+
+                     <!-- CHECK RETROVISOR FOTOCROMÁTICO-->
+
+                         <span class="bg-warning p-2 border rounded col-3 m-1" id="check-retrovisor-fotocromatico" >
+                             <label for="retrovisor-fotocromatico"  class="texto-checkbox-2">Retrovisor Fotocromático</label>
+                             <input type="checkbox" id="retrovisor-fotocromatico" class="input-checkbox-2" name="retrovisor_fotocromatico" value="Retrovisor Fotocromático">
+                         </span>
+
+                    <!-- FINAL   RETROVISOR FOTOCROMÁTICO   -->
+
+                     <!-- CHECK RETROVISOR INTERNO ELÉTROCRÔMICO-->
+
+                         <span class="bg-warning p-2 border rounded col-4 m-1" id="check-retrovisor-interno-eletrocromico" >
+                             <label for="retrovisor-interno-eletrocromico"  class="checkbox-itens-carros">Retrovisor Interno Eletrocrômico</label>
+                             <input type="checkbox" id="retrovisor-interno-eletrocromico"  name="retrovisor_interno_eletrocromico" value="Retrovisor Interno Eletrocrômico">
+                         </span>
+
+                    <!-- FINAL   RETROVISOR FOTOCROMÁTICO   -->
+
+                     <!-- CHECK RETROVISOR ELÉTRICO-->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-retrovisor-eletrico" >
+                             <label for="retrovisor-eletrico"  class="texto-checkbox">Retrovisor Elétrico</label>
+                             <input type="checkbox" id="retrovisor-eletrico" class="input-checkbox"  name="retrovisor_eletrico" value="Retrovisor Elétrico">
+                         </span>
+
+                    <!-- FINAL   RETROVISOR ELÉTRICO   -->
+
+                     <!-- CHECK RODA DE LIGA LIEVE-->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-roda-liga-leve" >
+                             <label for="roda-liga-leve"  class="texto-checkbox-2">Roda Liga leve</label>
+                             <input type="checkbox" id="roda-liga-leve" class="input-checkbox-2"  name="roda_liga_leve" value="Roda Liga Leve">
+                         </span>
+
+                    <!-- FINAL   RODA LIGA LEVE   -->
+
+                     <!-- CHECK SENSOR DE CHUVA-->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-sensor-chuva" >
+                             <label for="sensor-chuva"  class="texto-checkbox-2">Sensor Chuva</label>
+                             <input type="checkbox" id="sensor-chuva" class="input-checkbox-2"  name="sensor_chuva" value="Sensor Chuva">
+                         </span>
+
+                    <!-- FINAL   SENSOR DE CHUVA   -->
+
+                      <!-- CHECK SENSOR DE ESTACIONAMENTO DIANTEIRO-->
+
+                         <span class="bg-warning p-2 border rounded col-4 m-1" id="check-sensor-estacionamento-dianteiro" >
+                             <label for="sensor-estacionamento-dianteiro"  class="checkbox-itens-carros">Sensor Estacionamento Dianteiro</label>
+                             <input type="checkbox" id="sensor-estacionamento-dianteiro"   name="sensor_estacionamento_dianteiro" value="Sensor Estaciomento Dianteiro">
+                         </span>
+
+                    <!-- FINAL   SENSOR DE ESTACIONAMENTO DIANTEIRO  -->
+
+                    <!-- CHECK SENSOR DE ESTACIONAMENTO TRASEIRO-->
+
+                         <span class="bg-warning p-2 border rounded col-4 m-1" id="check-sensor-estacionamento-traseiro" >
+                             <label for="sensor-estacionamento-traseiro"  class="checkbox-itens-carros">Sensor Estacionamento Traseiro</label>
+                             <input type="checkbox" id="sensor-estacionamento-traseiro"   name="sensor_estacionamento_traseiro" value="Sensor Estaciomento Traseiro">
+                         </span>
+
+                    <!-- FINAL   SENSOR DE ESTACIONAMENTO TRASEIRO  -->
+
+                     <!-- CHECK TETO SOLAR-->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-teto-solar" >
+                             <label for="teto-solar"  class="checkbox-itens-carros">Teto Solar</label>
+                             <input type="checkbox" id="teto-solar"    name="teto_solar" value="Teto Solar">
+                         </span>
+
+                    <!-- FINAL   TETO SOLAR  -->
+
+                    <!-- CHECK TETO PANORÂMICO-->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-teto-panoramico" >
+                             <label for="teto-panoramico"  class="texto-checkbox-4">Teto Panorâmico</label>
+                             <input type="checkbox" id="teto-panoramico" class="input-checkbox-4"  name="teto_panoramico" value="Teto Panorâmico">
+                         </span>
+
+                    <!-- FINAL   TETO PANORÂMICO  -->
+
+                    <!-- CHECK TRAÇÃO-->
+
+                         <span class="bg-warning p-2 border rounded col-1 m-1" id="check-tracao" >
+                             <label for="tracao"  class="texto-checkbox">Tração</label>
+                             <input type="checkbox" id="tracao" class="input-checkbox"  name="tracao" value="Tração">
+                         </span>
+
+                    <!-- FINAL   TRAÇÃO  -->
+
+                    <!-- CHECK TRAVA ELÉTRICA-->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-trava-eletrica" >
+                             <label for="trava-eletrica"  class="texto-checkbox-2">Trava Elétrica</label>
+                             <input type="checkbox" id="trava-eletrica" class="input-checkbox-1"  name="trava_eletrica" value="Trava Elétrica">
+                         </span>
+
+                    <!-- FINAL   TRAVA ELÉTRICA  -->
+
+                     <!-- CHECK USB-->
+
+                         <span class="bg-warning p-2 border rounded col-1 m-1" id="check-usb" >
+                             <label for="usb"  class="texto-checkbox">USB</label>
+                             <input type="checkbox" id="usb" class="input-checkbox"  name="usb" value="USB">
+                         </span>
+
+                    <!-- FINAL   USB  -->
+
+                    <!-- CHECK VIDRO ELÉTRICO -->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-vidro-eletrico" >
+                             <label for="vidro-eletrico"  class="texto-checkbox-2">Vidro Elétrico</label>
+                             <input type="checkbox" id="vidro-eletrico" class="input-checkbox-2"  name="vidro_eletrico" value="Vidro Elétrico">
+                         </span>
+
+                    <!-- FINAL   VIDRO ELÉTRICO  -->
+
+                     <!-- CHECK VIDRO VERDES -->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-vidro-verdes" >
+                             <label for="vidro-verdes"  class="texto-checkbox-2">Vidro Verdes</label>
+                             <input type="checkbox" id="vidro-verdes" class="input-checkbox-2"  name="vidro_verdes" value="Vidro Verdes">
+                         </span>
+
+                    <!-- FINAL   VIDRO VERDES  -->
+
+                     <!-- CHECK VOLANTE COM REGULAGEM DE ALTURA -->
+
+                         <span class="bg-warning p-2 border rounded col-3 m-1" id="check-volante-regulagem-altura" >
+                             <label for="regulagem-altura"  class="texto-checkbox">Volante com Regulagem Altura</label>
+                             <input type="checkbox" id="regulagem-altura" class="input-checkbox"  name="regulagem_altura" value="Volante com Regulagem Altura">
+                         </span>
+
+                    <!-- FINAL   VOLANTE COM REGULAGEM DE ALTURA  -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -597,7 +941,7 @@
      $(document).ready(function(){
 
 
-	});
+    });
 
 
 
