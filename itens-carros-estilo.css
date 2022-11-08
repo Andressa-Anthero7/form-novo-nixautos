@@ -1,98 +1,170 @@
 
+
+@media (min-width: 1024.00px) and (max-width: 1399.98px){
         *{
             margin: 0;
             padding: 0;
         }
 
+        body{
+            font-size: 1em;
+            font-family: "Trebuchet MS", Helvetica, sans-serif;
+            background: #e6e6e6;
+        }
+
+        ul{
+            display: block;
+        }
+
+
+        #formulario{
+            max-width: 600px;
+        }
+
+        .form-control{
+                height: 32px;
+        }
+
+        #validar-placa{
+            font-size: 0.7em;
+        }
+
+        
+        
+
+
+        #escolha-tipo-field{
+            position: relative;
+            left: 190px;
+        }
+
+        #escolha-tipo-veiculo{
+            display: inline;
+
+        }
+
+       
+
+        #tipo-veiculo{
+            display: inline;
+        }
+
+        #header-formulario{
+            position: relative;
+
+        }
+
+
+        #menu-lateral{
+            position: relative;
+            top: 0px;
+        }
+
+        #anunciante-info{
+            border: 1px solid gray;
+            border-top-left-radius: 10px;
+             border-top-right-radius: 10px;
+        }
+
+
+        .btn-lateral{
+            border-bottom: 1px solid whitesmoke;
+            cursor: pointer;
+            background: #f0ad4e;
+            border-left:1px solid gray;
+            border-right:1px solid gray;
+           
+        }
+
+        .btn-final{
+             border-bottom-left-radius: 10px;
+             border-bottom-right-radius: 10px;
+             border-bottom: 1px solid gray;
+        }
+
+        .btn-lateral:hover{
+            background: whitesmoke;
+            transform: scale(1.03);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+
+        }
+
+        #img-logo-anunciante{
+            border: 1px solid black;
+            min-width: 160px;
+            min-height: 80px;
+        }
+
+
+
+        
+
+
+
+
+
 
 
         #campo-marca{
-            max-width: 250px;
-            left:30px;
+            
         }
 
 
 
         #campo-modelo{
-            position: relative;
-            top: -112px;
-            left:270px;
-            min-width: 620px;
+           
         }
 
         #campo-ano{
-            position: relative;
-            top: -224px;
-            left:880px;
-            max-width: 200px;
+            
         }
 
         #campo-combustivel{
-            position: relative;
-            top: -250px;
-            left: 30px;
+            
         }
 
         #campo-cor{
-            position: relative;
-            top: -362px;
-            left: 310px;
+            
         }
 
         #campo-portas{
-            position: relative;
-            top: -474px;
-            left: 590px;
+            
         }
 
         #campo-cambio{
-            position: relative;
-            top:-560px;
-            left:780px;
+           
         }
 
 
         #campo-ipva{
-            position: relative;
-            top:-560px;
-            left:30px;
+            
 
         }
 
         #campo-placa{
-            position: relative;
-            top:-650px;
-            left:350px;
+            
 
         }
 
         #placa{
-            position: relative;
-            top: 2px;
-            left: 0px;
+            
         }
 
 
 
         #campo-valor{
-            position: relative;
-            top:-740px;
-            left:750px;
-
+            
         }
 
 
 
         #valor{
-            position: relative;
-            top: 2px;
-            left: 0px;
+           
         }
 
-        #divisoria-1{
-            position: relative;
-            top: -700px;
-        }
+        
+
+        
 
 
 
@@ -100,21 +172,28 @@
 
         #itens-carros{
             position: relative;
-            top: -700px;
+            top: -750px;
+            overflow: scroll;
+            height:215px;
+            background: white;
 
         }
 
+        
+
         .etiqueta{
             position: relative;
-            top: 20px;
+            top: 30px;
             left: 0;
             z-index: -1;
+            font-size: 0.9em;
         }
 
         .checkbox-itens-carros, input{
             position: relative;
             top: 5px;
             left: 40px;
+            max-height: 50px;
         }
 
         .checkbox-itens-carros{
@@ -250,3 +329,15 @@
             top: 5px;
             left: 15px;
         }
+
+        #salvar{
+            position: relative;
+            top: -700px;
+            left: 800px;
+
+        }
+
+
+
+
+}

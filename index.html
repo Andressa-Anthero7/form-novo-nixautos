@@ -1,12 +1,22 @@
 <!DOCTYPE html>
- {% load static %}
+ <!--{% load static %}-->
 <html>
 <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lista de MARCA E MODELOS E ANOS CARROS Cidades Usando Jquery e JSON</title>
 
     <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+    <!-- Fontawesome CSS -->
+    <script src="https://kit.fontawesome.com/a69cec9c91.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="fontawesome/css/all.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" />
+
 
     <style type="text/css">
 
@@ -25,6 +35,7 @@
 
     </style>
 
+    
 
 
 
@@ -32,28 +43,86 @@
 </head>
 <body>
 
-<div class="container">
+<div class="container w-100">
     <!-- Passa o usuário logado no sistema -->
-        {% if user.is_authenticated %}
-                <div class="m-2 bg-warning">
-                    <div>User : {{ user.get_username }}</div>
+        <!--{% if user.is_authenticated %}-->
+                <div class="m-2 bg-warning  " id="barra-superior" >
+                    <!-- Btn Menu Hamburguer -->
+                    <span>
+                        <div class="btn bg-white fa fa-bars rounded p-1" id="menu-bar">Menu</div>
+                    </span>
+
+
+                    <!-- User logado -->
+                    <span class="d-inline">
+                        <span class="">User : {{ user.get_username }}</span>
+                        
+                        
+                    </span>
+
                 </div>
-                {% endif %}
+                <!--{% endif %}-->
         <!-- Field Select do Tipo do Anuncio -->
-        <div class="mb-1">
-            <label>Escolha tipo veículo</label>
-            <select name="tipo-veiculo" id="tipo-veiculo" class="form-control" >
+        <div class="mb-1" id="escolha-tipo-field">
+            <label id="escolha-tipo-veiculo" class="col-3">Escolha tipo veículo *</label>
+            <select name="tipo-veiculo" id="tipo-veiculo" class="form-control col-6" >
                 <option value="escolha">Escolha Tipo</option>
                 <option value="carros">Carro</option>
                 <option value="motos">Moto</option>
                 <option value="caminhoes">Caminhão</option>
             </select>
+                <div class="text-center p-2" id="texto-escolha-tipo">Escolha Inicialmente o Tipo do Véiculo do Anúncio</div>
+
+
+                   <div class="text-center p-2">* Campos obrigatorios são obrigatórios</div>
+
+
+                   
+
         </div>
+
+             
+       <span id="menu-lateral" class="col-3">
+                    
+                        <div class="   col-2 p-2 text-center" id="anunciante-info">
+                            <div>
+                                <img src="" id="img-logo-anunciante" alt="Logo do Anunciante">
+                            </div>
+                            <div>
+                                <small>E-mail:acdaa@gmail.com</small>
+                            </div>
+                            <div>
+                                <small>What´s App:(xx)9.9999-xx00</small>
+                            </div>
+                            
+                        </div>
+                            <div class=" btn-lateral   col-2 p-2 text-center" id="btn-leads-recebidos">Leads Recebidos</div>
+                            <div class=" btn-lateral   col-2 p-2 text-center" id="btn-cadastrar-veiculos">Cadastrar Veículo</div>
+                            <div class=" btn-lateral   col-2 p-2 text-center" id="btn-perfil">Perfil</div>
+                            <div class=" btn-lateral   col-2 p-2 text-center" id="btn-voltar">Voltar</div>
+                            <div class=" btn-lateral btn-final  col-2 p-2 text-center">Log Out</div>
+                       
+                        
+                    
+       </span>
+
+
         <script>
         $(document).ready(function() {
+            $('#escolha-tipo-field').hide();
+            $('#btn-leads-recebidos').css({'background':'whitesmoke'});
+
+
             $('#formulario').show();
             $('#itens-carros').show();
             $('#opcao-ar input').attr('disabled', true);
+            //$('#formulario').hide();
+            $('#itens-carros').hide();
+            $('#salvar').attr('disabled', true);
+            $('#valor').val('R$')
+
+
+
 
 
 
@@ -64,6 +133,15 @@
 
         });
 
+        $(document).on('click','#btn-cadastrar-veiculos', function (id) {
+            $('#escolha-tipo-field').show();
+            $('#btn-leads-recebidos').css({'background':'#f0ad4e'});
+            $('#btn-cadastrar-veiculos').css({'background':'whitesmoke'});
+             $('#menu-lateral').css({'position':'relative'});
+              $('#menu-lateral').css({'top':'-120px'});
+
+        })
+
 
 
 
@@ -73,9 +151,11 @@
             //alert(tipo)
             $('#formulario').show();
             $('#variavel-header-form').html(tipo.toUpperCase());
+            $('#texto-escolha-tipo').hide();
 
             if(tipo == 'carros'){
                 $('#itens-carros').show();
+                //$('#itens-carros').show();
             };
             if(tipo == 'motos'){
                 $('#itens-carros').hide();
@@ -89,7 +169,7 @@
 
 
             $.getJSON('https://parallelum.com.br/fipe/api/v1/'+tipo+'/marcas', function(data){
-                html += '<option>Selecionaraaaa Marca</option>';
+                html += '<option>Selecionar Marca</option>';
                 for(var i = 0; i < data.length; i++){
                         html += '<option value='+data[i].codigo+' >'+ data[i].nome+'</option><input id="campo-marca" name="field-marca"  value='+data[i].nome+'>';
 
@@ -115,7 +195,7 @@
 
 
             $.getJSON('https://parallelum.com.br/fipe/api/v1/'+tipo+'/marcas/'+mdl+'/modelos', function(modelos){
-                html += '<option>Selecionaraaaa Modelo</option>';
+                html += '<option>Selecionar Modelo</option>';
                 //console.log(modelos)
                 for(var c = 0; c < modelos.modelos.length; c++){
                         html += '<option value='+modelos.modelos[c].codigo+' >'+ modelos.modelos[c].nome+'</option><input id="campo-modelo" name="field-modelo"  value='+modelos.modelos[c].nome+'>';
@@ -200,15 +280,20 @@
 
 
 
-        <!-- Formulário Carros -->
-         <form enctype="multipart/form-data" method="POST" id="formulario" class=" border border-dark rounded " action="criar-anuncio/">
 
-                {% csrf_token %}
-                <div class=" p-2">
-                    <h3 class=" ml-5 pl-5 text-nowrap" id="header-formulario">Formulário<span class="px-2" id="variavel-header-form"></span></h3>
+        <!-- Formulário Carros -->
+         <form enctype="multipart/form-data" method="POST" id="formulario" class=" border border-dark rounded p-0 form  " action="criar-anuncio/">
+
+                <!--{% csrf_token %}-->
+                <div class=" p-0 m-0">
+                    <h3 class=" m-0 p-0 ml-5 pl-5 pb-0 pt-0 mt-0 mb-1 text-center text-nowrap" id="header-formulario">Formulário<span class="px-2 " id="variavel-header-form"></span></h3>
+                    <hr class="mx-0 mt-0 mb-1 p-0">
                 </div>
-                <div class="col-2" id="campo-marca">
-                    <label class="bg-warning px-2 pb-3 border rounded etiqueta">Marca</label>
+
+
+                <!-- CAMPO MARCA -->
+                <div class="col-10 mx-5" id="campo-marca" >
+                    <label class="bg-warning px-2 pb-3 border rounded etiqueta">Marca *</label>
                     <select class="form-control" id="Marca" name="marca">
                         <option>Selecionar Marca</option>
                     </select>
@@ -216,8 +301,11 @@
                     <br>
                 </div>
 
-                <div class="col-6 " id="campo-modelo">
-                     <label class="bg-warning px-2 pb-3 border rounded  etiqueta">Modelo</label>
+
+                 <!-- CAMPO MODELO -->
+
+                <div class="ml-5  " id="campo-modelo">
+                     <label class="bg-warning px-2 pb-3 border rounded  etiqueta">Modelo *</label>
                     <select class="form-control" id="Modelo" name="modelo">
                         <option>Selecionar Modelo</option>
                     </select>
@@ -226,8 +314,10 @@
                 </div>
 
 
-                <div class="col-2" id="campo-ano">
-                     <label class="bg-warning px-2 pb-3 border rounded  etiqueta">Ano</label>
+
+                 <!-- CAMPO ANO -->
+                <div class="col-3" id="campo-ano">
+                     <label class="bg-warning px-2 pb-3 border rounded  etiqueta">Ano *</label>
                     <select class="form-control" id="Ano" name="ano">
                         <option>Selecionar Ano</option>
                     </select>
@@ -235,12 +325,14 @@
                     <br>
                 </div>
 
+
+                 <!-- CAMPO COMBUSTIVEL -->
                 <div class="col-3" id="campo-combustivel">
                     <label  class="bg-warning px-2 pb-3 border rounded  etiqueta">Combustível</label>
                     <select class="form-control" id="Combustivel" name="combustivel">
                          <option>Selecionar Combustível</option>
                          <option value="gasolina">GASOLINA</option>
-                         <option value="alcool">ÁLCOOL</option>
+                         <option value="etanol">ETANOL</option>
                          <option value="diesel">DIESEL</option>
                           <option value="flex">FLEX</option>
                           <option value="eletrico">ELÉTRICO</option>
@@ -252,6 +344,8 @@
                 </div>
 
 
+
+                     <!-- CAMPO COR -->
                 <div class="col-3" id="campo-cor">
                     <label  class="bg-warning px-2 pb-3 border rounded  etiqueta">Cor</label>
                     <select class="form-control" id="Cor" name="cor">
@@ -265,6 +359,9 @@
                 </div>
              <!--Acessórios Carros -->
              <div id="complemento-carros">
+
+
+                 <!-- CAMPO PORTAS -->
                  <div id="campo-portas" class="col-2">
                      <label  class="bg-warning px-2 pb-3 border rounded  etiqueta">Portas</label>
                      <select class="form-control" id="portas" name="portas">
@@ -277,18 +374,23 @@
                      </select>
                  </div>
 
+                     <!-- CAMPO CAMBIO -->
                  <div id="campo-cambio" class="col-3">
                      <label  class="bg-warning px-2 pb-3 border rounded  etiqueta">Câmbio</label>
                      <select class="form-control" id="cambio" name="cambio">
                          <option>CÂMBIO</option>
                          <option value="MANUAL">MANUAL</option>
                          <option value="AUTOMÁTICO">AUTOMÁTICO</option>
+                         <option value="AUTOMÁTIZADO">AUTOMÁTZADO</option>
 
                      </select>
                  </div>
 
+                 <div class="col-1"></div>
+
+                  <!-- CAMPO IPVA -->
                  <div id="campo-ipva" class="col-3">
-                     <label  class="bg-warning px-2 pb-3 border rounded  etiqueta">Ipva</label>
+                     <label  class="bg-warning px-2 pb-3 border rounded  etiqueta">IPVA</label>
                      <select class="form-control" id="ipva" name="ipva">
                          <option value="ipva pago">SIM</option>
                          <option value="ipva nao pago">NÃO</option>
@@ -297,12 +399,202 @@
                  </div>
 
 
-
-                 <div id='campo-placa'>
+                     <!-- CAMPO PLACA -->
+                 <div id='campo-placa' class="col-8">
                     <label  class="bg-warning px-2 pb-3 border rounded  etiqueta">Placa</label>
-                    <input type="text" maxlength="8" name="placa" id="placa" class="form-control col-2" placeholder="ABC - 1B34">
+                    <input type="text" maxlength="7" name="placa" id="placa" class="form-control col-2" placeholder="ABC - 1B34"  onkeyup="validaPlaca();" >
+                    <span id="validacao"></span>
+                    <span class="" id="validacao-2"></span>
 
                  </div>
+
+                 <script type="text/javascript">
+                    var placa = new Array();
+                    
+                    const regexPlaca = /^[a-zA-Z]{3}[0-9]{4}$/;
+                    const regexPlacaMercosulCarro = /^[a-zA-Z]{3}[0-9]{1}[a-zA-Z]{1}[0-9]{2}$/;
+                    const regexPlacaMercosulMoto = /^[a-zA-Z]{3}[0-9]{2}[a-zA-Z]{1}[0-9]{1}$/;
+                    const regex1hifen = /^[a-zA-Z]{3}[-.\s]{1}$/;
+                    const regex2hifen = /^[a-zA-Z]{3}[-.\s]{2}$/;
+                    const regex3hifen = /^[a-zA-Z]{3}[-.\s]{3}$/;
+                    const regexInvalido1 = /^[a-zA-Z]{3}[0-9]{2}[a-zA-Z]{2}$/;
+                    const regexInvalido2 = /^[a-zA-Z]{3}[0-9]{3}[a-zA-Z]{1}$/;
+                    const regexInvalido3 = /^[a-zA-Z]{3}[a-zA-Z]{4}$/;
+                    const regexInvalido4 = /^[a-zA-Z]{3}[a-zA-Z]{2}[0-9]{2}$/;
+                    
+                   
+
+
+                    
+
+                    
+                    
+                    function validaPlaca(){
+                         var placa = $('#placa').val();
+
+
+                         var keylist = event.keyCode;
+                         //alert(keylist)
+
+                         if(keylist == 8 || keylist == 46){
+                            $('#validacao').html('');
+                            $('#placa').val('')
+
+                            
+                         }
+
+                         
+
+
+                         //VERIFICA 1ºDigito
+                         if(placa.length == 1){
+                            posicao = placa[0].search(/[a-zA-z]/d);
+                            if (posicao == -1){
+                                $('#validacao').html('1º Digito deve ser uma Letra');
+                                $('#placa').attr('maxlength','1');
+                            }
+                            
+                            
+                         };
+
+                         //VERIFICA 2ºDigito
+                         if(placa.length == 2){
+                            posicao = placa[1].search(/[a-zA-z]/d);
+                            if (posicao == -1){
+                                $('#validacao').html('2º Digito deve ser uma Letra');
+                                $('#placa').attr('maxlength','2');
+                            }
+                            
+                         };
+
+                         //VERIFICA 3ºDigito
+                         if(placa.length == 3){
+                            posicao = placa[2].search(/[a-zA-z]/d);
+                            if (posicao == -1){
+                                $('#validacao').html('3º Digito deve ser uma Letra');
+                                $('#placa').attr('maxlength','3');
+                            }
+                            
+                         };
+
+                         //VERIFICA 4ºDigito
+                         if(placa.length == 4){
+                            posicao = placa[3].search(/[0-9]/d);
+                            if (posicao == -1){
+                                $('#validacao').html('4º Digito deve ser um Número');
+                                $('#placa').attr('maxlength','4');
+
+                            }
+                            
+
+                            
+                         };
+
+
+
+
+                         
+
+                        
+                        // 7ª POSIÇÃO 
+                        if(placa.length == 7){
+                            if(regexPlaca.test(placa)){
+                                $('#validacao').html('Placa Comum')
+                                placaMascara = placa.replace(/[0-9]/d,'-'+placa[3])
+                                $('#placa').val(placaMascara);
+                            }
+
+                            if(regexPlacaMercosulCarro.test(placa)){
+                                tipoVeiculo = $('#tipo-veiculo').val();
+                                
+
+                                if(tipoVeiculo == 'motos'){
+                                    $('#validacao').html('Proibido placa de carros em anuncio motos.')
+                                }
+                                placaMascara = placa.replace(/[0-9]/d,' '+placa[3])
+                                $('#placa').val(placaMascara);
+                            }
+
+                            if(regexPlacaMercosulMoto.test(placa)){
+                                tipoVeiculo = $('#tipo-veiculo').val();
+                                
+
+                                if(tipoVeiculo == 'carros'){
+                                    $('#validacao').html('Proibido placa de motos em anuncio carros.')
+                                }
+
+                                
+                                placaMascara = placa.replace(/[0-9]/d,' '+placa[3])
+                                $('#placa').val(placaMascara);
+
+                                
+                            }
+
+                            if(regexInvalido1.test(placa)){
+                                $('#validacao').html('Placa Inválida')
+                            }
+
+                            if(regexInvalido2.test(placa)){
+                                $('#validacao').html('Placa Inválida')
+                            }
+
+                            if(regexInvalido3.test(placa)){
+                                $('#validacao').html('Placa Inválida')
+                            }
+                            
+
+                            if(regexInvalido4.test(placa)){
+                                $('#validacao').html('Placa Inválida')
+                            }
+                        }
+
+
+
+
+
+                        
+
+
+
+                        
+                       
+                        
+                            
+                          
+                          
+
+
+
+                           
+
+                    };
+
+                   
+
+
+                
+                        
+                            
+
+                           
+
+                       
+
+                    
+                    
+                        
+
+                   
+
+
+                    
+
+
+
+                    
+
+
+                </script>
 
 
 
@@ -311,21 +603,45 @@
 
 
 
-
-
-
-
-
-
+                     <!-- CAMPO VALOR -->
                 <div id="campo-valor">
-                    <label  for="valor" class="bg-warning px-2 pb-3 border rounded  etiqueta" style="position:relative;top:20px;left:10px;font-weight:bold;" >VALOR</label>
-                    <input type="text" maxlength="15" name="valor" id="valor" class="form-control col-3">
+                    <label  for="valor" class="bg-warning px-2 pb-3 border rounded  etiqueta" style="font-weight:bold;" >VALOR *</label>
+                    
+                    <div><input type="text"  name="valor" id="valor" class="form-control col-3" size="12"  onKeyUp="mascaraMoeda(this, event)">
 
                 </div>
 
+                <!-- Mascára de Formataçao valor em valor monetério -->
+
+                <script type="text/javascript">
+                    String.prototype.reverse = function(){
+                          return this.split('').reverse().join(''); 
+                        };
+
+                        function mascaraMoeda(campo,evento){
+                          var tecla = (!evento) ? window.event.keyCode : evento.which;
+                          var valor  =  campo.value.replace(/[^\d]+/gi,'').reverse();
+                       
+                          var resultado  = "";
+                          var mascara = "##.###.###,##".reverse();
+                          for (var x=0, y=0; x<mascara.length && y<valor.length;) {
+                            if (mascara.charAt(x) != '#') {
+                              resultado += mascara.charAt(x);
+                              x++;
+                            } else {
+                              resultado += valor.charAt(y);
+                              y++;
+                              x++;
+                            }   
+                          }
+                          campo.value = 'R$ '+resultado.reverse();
+                    }
+                    
+                </script>
+
                 <div id="divisoria-1"><hr></div>
 
-                <div id="itens-carros" class="m-3 row">
+                <div id="itens-carros" class="mx-1 p-3 row">
 
 
 
@@ -442,6 +758,15 @@
 
                     <!-- FINAL CKECK DIANTEIROS COM REGULAGEM ELÉTRICA-->
 
+                      <!-- CHECK BLINDADO -->
+
+                         <span class="bg-warning p-2 border rounded col-2 m-1" id="check-blindado" >
+                             <label for="blindado"  class="checkbox-itens-carros">Blindado</label>
+                             <input type="checkbox" id="blindado"   name="blindado" value="Blindado">
+                         </span>
+
+                    <!-- FINAL   CD/MP3 -->
+
                     <!-- CKECK BLUETOOTH-->
 
                          <span class="bg-warning p-2 border rounded col-2 m-1" id="check-bluetooth" >
@@ -460,14 +785,7 @@
 
                     <!-- FINAL  CALOTAS-->
 
-                    <!-- CKECK CÂMBIO AUTOMATIZADO -->
-
-                         <span class="bg-warning p-2 border rounded col-3 m-1" id="check-cambio-automatizado" >
-                             <label for="cambio-automatizado"  class="checkbox-itens-carros">Câmbio Automatizado</label>
-                             <input type="checkbox" id="cambio-automatizado"  name="cambio_automatizado" value="Câmbio Automatizado">
-                         </span>
-
-                    <!-- FINAL  CÂMBIO AUTOMATIZADO-->
+                    
 
                     <!-- CKECK CÂMERA DE RÉ -->
 
@@ -930,10 +1248,11 @@
 
 
                 <!-- BTN SALVAR -->
-                <div><input type="submit"  class="mt-3  float-right" id="salvar" onclick="salvar()"></div>
+                <button type="submit"  class="btn btn-warning " id="salvar" >Proxímo Passo - Adicionar Fotos</button>
 
          </form>
 
+         
 
 
 </div>
